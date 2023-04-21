@@ -17,8 +17,8 @@ return [
     'reader-shibboleth'=>[
         'status'=>USAGE_OPTIONAL,
         'ok'=>'_success',
-        'error'=>'_abort',
-        'na'=>'_abort',
+        'error'=>'reader-basicauth',
+        'na'=>'reader-basicauth',
     ],
     'reader-basicauth'=>[
         'status'=>USAGE_OPTIONAL,
