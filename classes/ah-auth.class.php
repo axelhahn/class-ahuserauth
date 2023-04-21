@@ -156,7 +156,7 @@ class ahAuth
      */
     protected function _getDefaultUser(){
         $aNewUser = $this->_aDefaultuser;
-        $aNewUser['file'] = isset($SERVER['PHP_SELF']) ? $SERVER['PHP_SELF'] : '';
+        $aNewUser['file'] = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : '';
         return $aNewUser;
     }
     /**
@@ -218,7 +218,7 @@ class ahAuth
      */
     public function getAuthType()
     {
-        $sFile = $this->_getAuthValue('file');
+        $sFile = $this->_getAuthValue('classfile');
         if (!$sFile) {
             return false;
         }

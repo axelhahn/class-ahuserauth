@@ -42,6 +42,10 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
             return false;
         }
         $aNewUser = $this->_getDefaultUser();
+        $aNewUser['class'] = __CLASS__;
+        $aNewUser['classfile'] = __FILE__;
+        $aNewUser['groups'][] = __CLASS__;
+
         $aNewUser['userid'] = $this->_aShibData['uniqueID'];
         $aNewUser['uuid'] = $this->_aShibData['uniqueID']; // we trust shibboleth that its uniqueId *IS* uniq
 
