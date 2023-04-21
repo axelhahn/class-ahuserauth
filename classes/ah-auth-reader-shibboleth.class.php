@@ -30,9 +30,10 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
         // echo '<pre>'.print_r($_SERVER, 1).'</pre>';
         foreach ($_SERVER as $sKey => $value) {
             if (
-                preg_match('/^[a-z]/', $sKey)
+                ( preg_match('/^[a-z]/', $sKey) && !preg_match('/^(argv|argc)$/', $sKey))
                 || preg_match('/^Shib\-(Identity-Provider|Session-ID|Handler)/', $sKey)
                 || preg_match('/^Meta\-(largeLogo|displayName)/', $sKey)
+                || preg_match('/^(AUTH_TYPE|REMOTE_USER)$/', $sKey)
             ) {
                 $this->_aShibData[$sKey] = $_SERVER[$sKey];
             }

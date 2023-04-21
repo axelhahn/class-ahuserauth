@@ -47,6 +47,10 @@ class ahAuthReaderbasicauth extends ahAuth implements ahAuthReaderInterface
             return false;
         }
         $aNewUser = $this->_getDefaultUser();
+        $aNewUser['class'] = __CLASS__;
+        $aNewUser['classfile'] = __FILE__;
+        $aNewUser['groups'][] = __CLASS__;
+
         $aNewUser['userid'] = $sFoundUser;
         $aNewUser['uuid'] = $sFoundUser . '__' . __CLASS__;
         $aNewUser['groups'][] = $sKey;

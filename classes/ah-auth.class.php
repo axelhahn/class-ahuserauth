@@ -60,11 +60,9 @@ class ahAuth
 
         if($this->_aUser){
             $this->_aUser['_fromSession']=1;
-            // echo "DEBUG: Session detected - ".$this->_aUser['uuid']; sleep(1);
-            // die();
         } else {
             // if detect auth-reader class
-            if ($this->isAutodect){
+            if ($this->isAutodect && method_exists($this, "detectAuth")){
                 $this->detectAuth();
             }
         }
@@ -158,10 +156,7 @@ class ahAuth
      */
     protected function _getDefaultUser(){
         $aNewUser = $this->_aDefaultuser;
-        $aNewUser['class'] = __CLASS__;
-        $aNewUser['classfile'] = __FILE__;
         $aNewUser['file'] = isset($SERVER['PHP_SELF']) ? $SERVER['PHP_SELF'] : '';
-        $aNewUser['groups'][] = __CLASS__;
         return $aNewUser;
     }
     /**
