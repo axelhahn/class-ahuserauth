@@ -40,6 +40,7 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
     public function detectAuth()
     {
         // echo '<pre>'.print_r($_SERVER, 1).'</pre>';
+        $this->_aShibData=[];
         foreach ($_SERVER as $sKey => $value) {
             if (
                 ( preg_match('/^[a-z]/', $sKey) && !preg_match('/^(argv|argc)$/', $sKey))
