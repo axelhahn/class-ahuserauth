@@ -4,7 +4,6 @@ require(__DIR__.'/inc_fakeenv_basicauth.php');
 
 $oAccess=new axelhahn\ahAccesscontrol();
 
-echo "OK: class was initialized.".PHP_EOL;
 if(!$oAccess->detectUser()) {
     echo "NO USER user was detected. Now should follow a login form. ".PHP_EOL;
 } else {
