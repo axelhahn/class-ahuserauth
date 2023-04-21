@@ -20,12 +20,6 @@ class ahAuthReaderbasicauth extends ahAuth implements ahAuthReaderInterface
         "REMOTE_USER",
     ];
 
-    public function __construct2()
-    {
-        $this->_detectBasicauth();
-        return true;
-    }
-
     // ----------------------------------------------------------------------
     // IMPLEMENTATION
     // ----------------------------------------------------------------------
@@ -39,7 +33,7 @@ class ahAuthReaderbasicauth extends ahAuth implements ahAuthReaderInterface
     // other functions
     // ----------------------------------------------------------------------
 
-    protected function _detectBasicauth()
+    public function detectAuth()
     {
         $sFoundUser = false;
         foreach ($this->_aSrvVars as $sKey) {
@@ -52,12 +46,9 @@ class ahAuthReaderbasicauth extends ahAuth implements ahAuthReaderInterface
             $this->_lasterror = __METHOD__ . '() - no basic auth user was found.';
             return false;
         }
-        $aNewUser = $this->_aDefaultuser;
+        $aNewUser = $this->_getDefaultUser();
         $aNewUser['userid'] = $sFoundUser;
         $aNewUser['uuid'] = $sFoundUser . '__' . __CLASS__;
-        $aNewUser['file'] = __FILE__;
-        $aNewUser['class'] = __CLASS__;
-        $aNewUser['groups'][] = __CLASS__;
         $aNewUser['groups'][] = $sKey;
 
         $this->_aUser = $aNewUser;

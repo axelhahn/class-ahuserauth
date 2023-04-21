@@ -36,10 +36,8 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
         if (file_exists($sUserfile)) {
             return false;
         }
-        $aNewUser = $this->_aDefaultuser;
+        $aNewUser = $this->_getDefaultUser();
         $aNewUser['userid'] = $sUser;
-        $aNewUser['file'] = __FILE__;
-        $aNewUser['class'] = __CLASS__;
         $aNewUser['password'] = $this->_generatePasswordHash($sPassword);
         // $aNewUser['created']=date('U');
         $this->_aUser = $aNewUser;

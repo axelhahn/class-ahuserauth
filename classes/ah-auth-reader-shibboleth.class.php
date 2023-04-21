@@ -13,13 +13,6 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
     protected $_aShibData = [];
 
     // ----------------------------------------------------------------------
-    public function __construct2()
-    {
-        $this->_detectShibolethData();
-        return true;
-    }
-
-    // ----------------------------------------------------------------------
     // IMPLEMENTATION
     // ----------------------------------------------------------------------
 
@@ -32,7 +25,7 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
     // other functions
     // ----------------------------------------------------------------------
 
-    protected function _detectShibolethData()
+    public function detectAuth()
     {
         // echo '<pre>'.print_r($_SERVER, 1).'</pre>';
         foreach ($_SERVER as $sKey => $value) {
@@ -47,13 +40,10 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
         if (!isset($this->_aShibData['uniqueID'])) {
             return false;
         }
-        $aNewUser = $this->_aDefaultuser;
+        $aNewUser = $this->_getDefaultUser();
         $aNewUser['userid'] = $this->_aShibData['uniqueID'];
         $aNewUser['uuid'] = $this->_aShibData['uniqueID']; // we trust shibboleth that its uniqueId *IS* uniq
-        $aNewUser['class'] = __CLASS__;
-        $aNewUser['file'] = __FILE__;
 
-        $aNewUser['groups'][] = __CLASS__;
         if (isset($this->_aShibData['homeOrganizationType'])) {
             $aNewUser['groups'][] = $this->_aShibData['homeOrganizationType'];
             if (isset($this->_aShibData['homeOrganization'])) {

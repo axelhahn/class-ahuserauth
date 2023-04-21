@@ -167,7 +167,7 @@ class ahAccesscontrol
             . 'oAccess->groups: ' . print_r($this->groups, 1) . PHP_EOL
             . PHP_EOL
             . '------ roles:' . PHP_EOL
-            . 'oAccess->roles: ' . print_r($this->roles, 1) . PHP_EOL
+            . 'oAccess->roles: ' . htmlentities(print_r($this->roles, 1)) . PHP_EOL
             . PHP_EOL;
 
         return $sReturn;

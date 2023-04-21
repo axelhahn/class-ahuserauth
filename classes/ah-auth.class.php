@@ -33,6 +33,7 @@ class ahAuth
         'password' => '',
         'groups' => [],
         'class' => '',
+        'classfile' => '',
         'file' => '',
     ];
 
@@ -62,8 +63,9 @@ class ahAuth
             // echo "DEBUG: Session detected - ".$this->_aUser['uuid']; sleep(1);
             // die();
         } else {
+            // if detect auth-reader class
             if ($this->isAutodect){
-                $this->__construct2();
+                $this->detectAuth();
             }
         }
         return true;
@@ -150,6 +152,18 @@ class ahAuth
     // ----------------------------------------------------------------------
     // USER FUNCTIONS
     // ----------------------------------------------------------------------
+
+    /**
+     * get array
+     */
+    protected function _getDefaultUser(){
+        $aNewUser = $this->_aDefaultuser;
+        $aNewUser['class'] = __CLASS__;
+        $aNewUser['classfile'] = __FILE__;
+        $aNewUser['file'] = isset($SERVER['PHP_SELF']) ? $SERVER['PHP_SELF'] : '';
+        $aNewUser['groups'][] = __CLASS__;
+        return $aNewUser;
+    }
     /**
      * abstracted read implementation for all auth types
      * @return bool|array
