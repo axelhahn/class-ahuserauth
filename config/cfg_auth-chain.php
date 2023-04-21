@@ -14,22 +14,6 @@ define('USAGE_REQUIRED', 2);
  * @var array
  */
 return [
-    'session'=>[
-        'status'=>USAGE_DISABLED,
-        'ok'=>'_success',
-        // 'error'=>'reader-basicauth',
-        // 'na'=>'reader-basicauth',
-        'error'=>'reader-shibboleth',
-        'na'=>'reader-shibboleth',
-    ],
-    /*
-    'cookie'=>[
-        'required'=>false,
-        'ok'=>'_success',
-        'error'=>'basic-auth',
-        'na'=>'basic-auth',
-    ],
-    */
     'reader-shibboleth'=>[
         'status'=>USAGE_OPTIONAL,
         'ok'=>'_success',

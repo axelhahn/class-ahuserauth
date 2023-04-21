@@ -163,6 +163,8 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
             if (isset($this->_aUser['password'])) {
                 $this->_aUser['uuid'] = $this->_aUser['userid'] . '__' . __CLASS__;
                 $this->_aUser['groups'][] = __CLASS__;
+
+                $this->setSession();
                 return true;
             }
         }

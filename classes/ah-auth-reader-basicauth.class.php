@@ -20,7 +20,7 @@ class ahAuthReaderbasicauth extends ahAuth implements ahAuthReaderInterface
         "REMOTE_USER",
     ];
 
-    public function __construct()
+    public function __construct2()
     {
         $this->_detectBasicauth();
         return true;
@@ -61,6 +61,7 @@ class ahAuthReaderbasicauth extends ahAuth implements ahAuthReaderInterface
         $aNewUser['groups'][] = $sKey;
 
         $this->_aUser = $aNewUser;
+        $this->setSession();
 
         return true;
     }

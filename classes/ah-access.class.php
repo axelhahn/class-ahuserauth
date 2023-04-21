@@ -98,7 +98,7 @@ class ahAccesscontrol
             $aUsedTypes = [];
         }
 
-        echo __METHOD__ . "($sType)" . PHP_EOL;
+        // echo __METHOD__ . "($sType)" . PHP_EOL;
 
         // --- check if a next hop does not exist
         if (!isset($this->_aSequence[$sType])) {
@@ -173,6 +173,7 @@ class ahAccesscontrol
         return $sReturn;
     }
 
+    
     // ----------------------------------------------------------------------
     // USER FUNCTIONS
     // ----------------------------------------------------------------------
@@ -198,7 +199,9 @@ class ahAccesscontrol
             if ($aSeqItem['status'] != USAGE_DISABLED) {
                 $this->setAuthType($sType);
                 $sNext = $aSeqItem['error'];
-                if ($this->auth->isAutodect && $this->auth->getUserid()) {
+
+                if ($this->auth->isAutodect && $this->auth->getUserid())
+                 {
                     $sNext = $aSeqItem['ok'];
                     $this->user = $this->auth->getUserid();
                     $this->addGroupsAndRoles();

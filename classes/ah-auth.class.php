@@ -51,6 +51,21 @@ class ahAuth
 
     public function __construct()
     {
+        if(!isset($_SESSION)){
+            session_name(md5(__FILE__));
+            session_start();
+        }
+        $this->_aUser=$this->getSession();
+
+        if($this->_aUser){
+            $this->_aUser['_fromSession']=1;
+            // echo "DEBUG: Session detected - ".$this->_aUser['uuid']; sleep(1);
+            // die();
+        } else {
+            if ($this->isAutodect){
+                $this->__construct2();
+            }
+        }
         return true;
     }
 
@@ -64,10 +79,6 @@ class ahAuth
     {
         return $this->_lasterror;
     }
-
-    // ----------------------------------------------------------------------
-    // USER FUNCTIONS
-    // ----------------------------------------------------------------------
 
     /**
      * detect a sent basic authentication in request header and get an array 
@@ -88,6 +99,9 @@ class ahAuth
         return false;
     }
 
+    // ----------------------------------------------------------------------
+    // PASSWORD FUNCTIONS
+    // ----------------------------------------------------------------------
     /**
      * shared function: generate a password hash of a given password
      * @param  string  $sPassword  password to hash
@@ -109,6 +123,32 @@ class ahAuth
         return password_verify($sPassword, $sPasswordHash);
     }
 
+    // ----------------------------------------------------------------------
+    // SESSION FUNCTIONS
+    // ----------------------------------------------------------------------
+    protected function setSession()
+    {
+        $_SESSION['AUTH_USER']=$this->_read();
+        session_write_close();
+        return true;
+    }
+    protected function getSession()
+    {
+        if(isset($_SESSION['AUTH_USER']) && $_SESSION['AUTH_USER']){
+            $this->_aUser=$_SESSION['AUTH_USER'];
+        }
+        return $this->_aUser;
+        ;
+    }
+    protected function closeSession()
+    {
+        session_destroy();
+        $this->_aUser = false;
+        return true;
+    }
+
+    // ----------------------------------------------------------------------
+    // USER FUNCTIONS
     // ----------------------------------------------------------------------
     /**
      * abstracted read implementation for all auth types

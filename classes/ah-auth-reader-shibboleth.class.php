@@ -13,7 +13,7 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
     protected $_aShibData = [];
 
     // ----------------------------------------------------------------------
-    public function __construct()
+    public function __construct2()
     {
         $this->_detectShibolethData();
         return true;
@@ -54,22 +54,24 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
         $aNewUser['file'] = __FILE__;
 
         $aNewUser['groups'][] = __CLASS__;
-        $aNewUser['groups'][] = $this->_aShibData['homeOrganizationType'];
-        if (isset($this->_aShibData['homeOrganization'])) {
-            $sGroupbase = $this->_aShibData['homeOrganizationType'] . '/' . $this->_aShibData['homeOrganization'];
-            $aNewUser['groups'][] = $sGroupbase;
-            if (isset($this->_aShibData['affiliation'])) {
-                $aNewUser['groups'][] = $sGroupbase . '/' . $this->_aShibData['affiliation'];
-            }
-            if (isset($this->_aShibData['isMemberOf'])) {
-                $aNewUser['groups'][] = $sGroupbase . '/' . $this->_aShibData['isMemberOf'];
+        if (isset($this->_aShibData['homeOrganizationType'])) {
+            $aNewUser['groups'][] = $this->_aShibData['homeOrganizationType'];
+            if (isset($this->_aShibData['homeOrganization'])) {
+                $sGroupbase = $this->_aShibData['homeOrganizationType'] . '/' . $this->_aShibData['homeOrganization'];
+                $aNewUser['groups'][] = $sGroupbase;
+                if (isset($this->_aShibData['affiliation'])) {
+                    $aNewUser['groups'][] = $sGroupbase . '/' . $this->_aShibData['affiliation'];
+                }
+                if (isset($this->_aShibData['isMemberOf'])) {
+                    $aNewUser['groups'][] = $sGroupbase . '/' . $this->_aShibData['isMemberOf'];
+                }
             }
         }
 
 
         $aNewUser['_shibboleth'] = $this->_aShibData;
         $this->_aUser = $aNewUser;
-
+        $this->setSession();
         return true;
     }
 }
