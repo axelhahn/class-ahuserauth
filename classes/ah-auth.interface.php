@@ -8,7 +8,6 @@ interface ahAuthInterface{
     public function delete();
 
     public function authenticate($sUser, $sPassword);
-    public function error();
     public function list();
     public function set($sUser);
 }

@@ -24,6 +24,12 @@ class ahAuthReaderbasicauth extends ahAuth implements ahAuthReaderInterface
     // IMPLEMENTATION
     // ----------------------------------------------------------------------
 
+    /**
+     * read current user
+     * implementation of interface function
+     * 
+     * @return array
+     */
     public function read()
     {
         return $this->_read();
@@ -33,6 +39,15 @@ class ahAuthReaderbasicauth extends ahAuth implements ahAuthReaderInterface
     // other functions
     // ----------------------------------------------------------------------
 
+    /**
+     * detect basic authentication from $_SERVER scope
+     * implementation of interface function
+     * 
+     * remark: start basic auth detection after other logins that write an auth
+     * user to REMOTE_UESER
+     * 
+     * @return array
+     */
     public function detectAuth()
     {
         $sFoundUser = false;

@@ -26,6 +26,10 @@ class tinypdo
      */
     protected $_bShowErrors = false;
 
+    /**
+     * last error
+     * @var string
+     */
     protected $_sLastError = false;
 
     // ----------------------------------------------------------------------

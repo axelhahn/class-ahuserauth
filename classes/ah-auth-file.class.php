@@ -23,6 +23,8 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
 
     /**
      * create a new user
+     * implementation of interface function
+     * 
      * @param  string  $sUser      userid
      * @param  string  $sPassword  password
      * @return bool
@@ -50,6 +52,8 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
 
     /**
      * get an array of known data of the current authenticated user
+     * implementation of interface function
+     * 
      * @return array
      */
     public function read()
@@ -59,6 +63,8 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
 
     /**
      * update user data
+     * implementation of interface function
+     * 
      * @param  array   $aData  array of new data; known keys are:
      *                         password - set a new password (it will be hashed) 
      *                         groups   - update groups value
@@ -94,6 +100,8 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
 
     /**
      * delete the current user
+     * implementation of interface function
+     * 
      * @return bool
      */
     public function delete()
@@ -107,6 +115,8 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
 
     /**
      * authenticate a user with username and password
+     * implementation of interface function
+     * 
      * @param  string  $sUser      userid
      * @param  string  $sPassword  password
      * @return bool
@@ -139,6 +149,7 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
 
     /**
      * get a list of all known userids
+     * implementation of interface function
      * @return array
      */
     public function list()
@@ -153,6 +164,7 @@ class ahAuthFile extends ahAuth implements ahAuthInterface
 
     /**
      * set a user as active
+     * implementation of interface function
      * @param  string  $sUser      userid
      * @return bool
      */

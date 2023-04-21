@@ -15,12 +15,6 @@ class ahAccesscontrol
      */
     protected $_sUsertype = '';
 
-    protected $_aSuppportedAuth = [
-        'basicauth'   => ['enabled' => 'true'],
-        'shibboleth'  => ['enabled' => 'true'],
-        'file'        => ['enabled' => 'true'],
-    ];
-
     protected $_sConfigdir = false;
     protected $_sDatadir = false;
     protected $_aSequence = [];
@@ -70,18 +64,18 @@ class ahAccesscontrol
         return true;
     }
 
+    /**
+     * init access class ... called from constructor
+     * @return boolean
+     */
     protected function _init()
     {
         $this->_sConfigdir = dirname(__DIR__) . '/config/';
-        $this->_sDatadir = dirname(__DIR__) . '/data/';
-        $this->_aSequence = require($this->_sConfigdir . '/cfg_auth-chain.php');
-        $this->_checkSequence();        /*
-        $this->db = new \PDO('sqlite:'.$this->_sDatadir.'/sqlite/ah-access.sqlite3', '', '', array(
-            \PDO::ATTR_EMULATE_PREPARES => false,
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
-        ));
-        */
+        $this->_sDatadir   = dirname(__DIR__) . '/data/';
+
+        $this->_aSequence  = require($this->_sConfigdir . '/cfg_auth-chain.php');
+        $this->_checkSequence();
+        return true;
     }
 
     /**
@@ -193,14 +187,15 @@ class ahAccesscontrol
         // walker START
         while ($sType[0] != '_') {
             $aSeqItem = $this->_aSequence[$sType];
-            // print_r($aSeqItem);
 
             $sNext = $aSeqItem['na'];
             if ($aSeqItem['status'] != USAGE_DISABLED) {
                 $this->setAuthType($sType);
                 $sNext = $aSeqItem['error'];
 
-                if ($this->auth->isAutodect && $this->auth->getUserid())
+                // echo "DEBUG: type $sType ".PHP_EOL;
+                // if ($this->auth->isAutodect && $this->auth->getUserid())
+                if ($this->auth->getUserid())
                  {
                     $sNext = $aSeqItem['ok'];
                     $this->user = $this->auth->getUserid();
@@ -220,6 +215,10 @@ class ahAccesscontrol
         return $this->user;
     }
 
+    /**
+     * set auth type: load a class for this type and put its instance to $this->auth
+     * @return boolean
+     */
     public function setAuthType($sType)
     {
         $this->auth = false;
@@ -228,12 +227,10 @@ class ahAccesscontrol
         if (!isset($this->_aSequence[$sType])) {
             die('ERROR: type [' . $sType . '] is not supported in ' . __METHOD__ . '.' . PHP_EOL);
         }
-        // if(!isset($this->_aSuppportedAuth[$sType])){
-        //     die('ERROR: type ['.$sType.'] is not supported in '.__METHOD__.'.'.PHP_EOL);
-        // }
         require_once(__DIR__ . '/ah-auth-' . $sType . '.class.php');
         $sClassname = 'axelhahn\ahAuth' . str_replace('-', '', ucfirst($sType));
         $this->auth = new $sClassname();
+        return true;
     }
 
     // ----------------------------------------------------------------------

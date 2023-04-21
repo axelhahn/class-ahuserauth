@@ -16,6 +16,12 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
     // IMPLEMENTATION
     // ----------------------------------------------------------------------
 
+    /**
+     * read current user
+     * implementation of interface function
+     * 
+     * @return array
+     */
     public function read()
     {
         return $this->_read();
@@ -25,6 +31,12 @@ class ahAuthReadershibboleth extends ahAuth implements ahAuthReaderInterface
     // other functions
     // ----------------------------------------------------------------------
 
+    /**
+     * detect shibboleth authentication from $_SERVER scope
+     * implementation of interface function
+     *
+     * @return array
+     */
     public function detectAuth()
     {
         // echo '<pre>'.print_r($_SERVER, 1).'</pre>';
