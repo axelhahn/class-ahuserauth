@@ -96,12 +96,12 @@ class ahAccesscontrol
 
         // --- check if a next hop does not exist
         if (!isset($this->_aSequence[$sType])) {
-            die("CONFIG ERROR: key [$sType] does not exist in sequence.");
+            throw new Exception("CONFIG ERROR: key [$sType] does not exist in sequence.");
         }
 
         // --- loop detection
         if (isset($aUsedTypes[$sType])) {
-            die("CONFIG ERROR: loop in sequence detected: key [$sType] was handled already");
+            throw new Exception("CONFIG ERROR: loop in sequence detected: key [$sType] was handled already");
         }
         $aSeqItem = $this->_aSequence[$sType];
         $aUsedTypes[$sType] = 1;
@@ -109,16 +109,14 @@ class ahAccesscontrol
         // --- check subkeys of an element ni chain
         foreach (['status', 'ok', 'error', 'na'] as $sKey) {
             if (!isset($aSeqItem[$sKey])) {
-                die("CONFIG ERROR: sequence[$sType] has no subkey $sKey.");
+                throw new Exception("CONFIG ERROR: sequence[$sType] has no subkey $sKey.");
             }
         }
 
         if ($aSeqItem['status'] != USAGE_DISABLED) {
-            // --- load the referenced class
-            try {
-                $this->setAuthType($sType);
-            } catch (Exception $e) {
-                die("CONFIG ERROR: the class for type [$sType] does not exist.");
+            // detect existance of classfile
+            if (!$this->setAuthType($sType, true)){
+                throw new Exception("CONFIG ERROR: the class for type [$sType] does not exist.");
             }
         }
         $aNextitems = [];
@@ -200,12 +198,6 @@ class ahAccesscontrol
                     $sNext = $aSeqItem['ok'];
                     $this->user = $this->auth->getUserid();
                     $this->addGroupsAndRoles();
-                    /*
-                    echo "USER: " . $this->user . PHP_EOL;
-                    echo "GROUPS: "; print_r($this->groups);
-                    echo "ROLES: "; print_r($this->roles);
-                    */
-                    // die("found");
                 }
             }
 
@@ -217,18 +209,26 @@ class ahAccesscontrol
 
     /**
      * set auth type: load a class for this type and put its instance to $this->auth
+     * 
+     * @param  {string}   $sType        name of the auth type to load
+     * @param  {boolean}  $bDetectOnly  check existance of classfile without loading it.
      * @return boolean
      */
-    public function setAuthType($sType)
+    public function setAuthType($sType, $bDetectOnly=false)
     {
         $this->auth = false;
         $this->_sUsertype = $sType;
 
         if (!isset($this->_aSequence[$sType])) {
-            die('ERROR: type [' . $sType . '] is not supported in ' . __METHOD__ . '.' . PHP_EOL);
+            throw new Exception('ERROR: type [' . $sType . '] is not supported in ' . __METHOD__ . '.' . PHP_EOL);
         }
-        require_once(__DIR__ . '/ah-auth-' . $sType . '.class.php');
+        $sClassfile=__DIR__ . '/ah-auth-' . $sType . '.class.php';
+        if ($bDetectOnly){
+            return file_exists($sClassfile);
+        }
+        require_once($sClassfile);
         $sClassname = 'axelhahn\ahAuth' . str_replace('-', '', ucfirst($sType));
+
         $this->auth = new $sClassname();
         return true;
     }
