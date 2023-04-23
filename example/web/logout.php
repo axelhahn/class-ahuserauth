@@ -4,8 +4,9 @@ require('inc_page.php');
 
 // do logout if a POST was sent
 if(isset($_POST['action']) && $_POST['action']=='logout'){
-    echo 'DEBUG: <pre>$_POST = '.print_r($_POST, 1).'</pre>';
+    // echo 'DEBUG: <pre>$_POST = '.print_r($_POST, 1).'</pre>';
     $oAccess->logout();
+    header('Location: '.basename(__FILE__));
 }
 
 getUser();
@@ -35,6 +36,6 @@ if (!$ACCESS_USER){
 
 showPage([
     'title'=>'Logout',
-    'nav'=>'',
+    'nav'=>' / <a href="profile.php">Profile</a> / <a href="'.basename(__FILE__).'">{{TITLE}}</a>',
     'content'=>$sContent,
 ]);

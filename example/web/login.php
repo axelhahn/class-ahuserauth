@@ -10,21 +10,17 @@ if (!$ACCESS_USER){
     </p>
     <ul>
         <li><a href="protected/shibboleth.php">AAI</a></li>
+        <li><a href="protected/basic-auth.php">Basic authentication</a></li>
     </ul>
     ';
 } else {
-    $sContent.='<h2>Logout</h2>
+    $sContent.='<h2>Login</h2>
     <p>
         You are logged in already.<br>
         Your user is <strong>'.$ACCESS_USER.'</strong>.<br>
         <br>
-        <a href="logout.php" class="pure-button">Logout</a>
+        <a href="profile.php" class="pure-button">Profile</a><br>
     </p>
-    <h2>Profile</h2>
-    <p>
-        Here is no real profile ... I just dump the known information :-)
-    </p>
-    <pre>'.print_r($oAccess->dump(), 1).'</pre>
     '
     ;
 }
@@ -33,6 +29,6 @@ if (!$ACCESS_USER){
 
 showPage([
     'title'=>'Login',
-    'nav'=>' / <a href="login.php">Login</a>',
+    'nav'=>' / <a href="'.basename(__FILE__).'">{{TITLE}}</a>',
     'content'=>$sContent,
 ]);

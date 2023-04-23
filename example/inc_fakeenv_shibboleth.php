@@ -12,5 +12,5 @@ $_SERVER['givenName']='Max (Devuser)';
 $_SERVER['homeOrganization']='example.com';
 $_SERVER['homeOrganizationType']='university';
 $_SERVER['surname']='Mustermann';
-$_SERVER['uniqueID']='hier-ist-eine-unique-id@example.com';
+$_SERVER['uniqueID']='my-unique-id@example.com';
 $_SERVER['isMemberOf']='com:example:department';

@@ -4,7 +4,7 @@ require('../inc_page.php');
 
 // (1) 
 // fake a login by setting some vars into $_SERVER ...
-require($ACCESS_APPDIR.'/example/inc_fakeenv_shibboleth.php');
+require($ACCESS_APPDIR.'/example/inc_fakeenv_basicauth.php');
 
 // (2)
 // ... and detect the user again
@@ -30,7 +30,7 @@ if (!$ACCESS_USER){
 
 
 showPage([
-    'title'=>'Login with Shibboleth',
+    'title'=>'Login with Basic Auth',
     'nav'=>' / <a href="../login.php">Login</a> / <a href="'.basename(__FILE__).'">{{TITLE}}</a>',
     'content'=>$sContent,
 ]);

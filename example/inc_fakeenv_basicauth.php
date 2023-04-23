@@ -6,6 +6,6 @@
 // ----------------------------------------------------------------------
 
 
-// $_SERVER["AUTH_USER"]='auth_user';         // IIS
-$_SERVER["PHP_AUTH_USER"]='php_auth_user';    // APACHE
-// $_SERVER["REMOTE_USER"]='remote_user';     // CGI standard
+// $_SERVER["AUTH_USER"]='John auth_user';         // IIS
+$_SERVER["PHP_AUTH_USER"]='John php_auth_user';    // APACHE
+// $_SERVER["REMOTE_USER"]='John remote_user';     // CGI standard

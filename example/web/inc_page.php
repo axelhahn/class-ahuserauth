@@ -1,28 +1,36 @@
 <?php
 
+// ----------------------------------------------------------------------
 global $ACCESS_USER; $ACCESS_USER='';
 global $oAccess;
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+// ----------------------------------------------------------------------
 
-
-
-$ACCESS_APPDIR=__DIR__.'/../../';
-require($ACCESS_APPDIR.'/classes/ah-access.class.php');
-
-$oAccess=new axelhahn\ahAccesscontrol();
-
+/**
+ * get currently logged in user
+ * It sets the global var $ACCESS_USER here
+ * @return boolean
+ */
 function getUser(){
     global $oAccess, $ACCESS_USER;
     if($oAccess->detectUser()) {
         // $ACCESS_USER=$oAccess->getUserid();
-        $ACCESS_USER=$oAccess->user;
+        // $ACCESS_USER=$oAccess->user;
+        $aUser=$oAccess->auth->read();
+        $ACCESS_USER=$aUser['userid'];
     }
     return true;    
 }
 
+/**
+ * show a webpage and exit
+ * @param  array  $aParts  array with these subkey for replacements in the template
+ *                           - title
+ *                           - nav
+ *                           - userprofile
+ *                           - content
+ * @return undefined
+ */
 function showPage($aParts, $iCode=200){
     global $oAccess, $ACCESS_USER;
     $sPage='<!doctype html>
@@ -49,13 +57,16 @@ function showPage($aParts, $iCode=200){
 
 
     if(!isset($aParts['userprofile'])){
-        $aParts['userprofile']=$ACCESS_USER ? $ACCESS_USER : '(Not logged in)';
+        $aParts['userprofile']=$ACCESS_USER 
+            ? '<a href="/profile.php">'.$ACCESS_USER.'</a>' 
+            : '<a href="/login.php">Login</a>'
+            ;
     }
     foreach([
-        '{{TITLE}}'=>'title',
         '{{CONTENT}}'=>'content',
         '{{NAV}}'=>'nav',
         '{{USERPROFILE}}'=>'userprofile',
+        '{{TITLE}}'=>'title',
     ] as $sFrom=>$sPartKey){
         $sPage=isset($aParts[$sPartKey]) ? str_replace($sFrom, $aParts[$sPartKey], $sPage) : $sPage;
     }
@@ -64,5 +75,20 @@ function showPage($aParts, $iCode=200){
     exit(0);
 }
 
+// ----------------------------------------------------------------------
 // INIT
+
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+
+
+$ACCESS_APPDIR=__DIR__.'/../../';
+require($ACCESS_APPDIR.'/classes/ah-access.class.php');
+
+$oAccess=new axelhahn\ahAccesscontrol();
+
 getUser();
+
+// ----------------------------------------------------------------------
