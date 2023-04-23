@@ -126,13 +126,13 @@ class ahAuth
     // ----------------------------------------------------------------------
     // SESSION FUNCTIONS
     // ----------------------------------------------------------------------
-    protected function setSession()
+    public function setSession()
     {
         $_SESSION['AUTH_USER']=$this->_read();
         session_write_close();
         return true;
     }
-    protected function getSession()
+    public function getSession()
     {
         if(isset($_SESSION['AUTH_USER']) && $_SESSION['AUTH_USER']){
             $this->_aUser=$_SESSION['AUTH_USER'];
@@ -140,8 +140,9 @@ class ahAuth
         return $this->_aUser;
         ;
     }
-    protected function closeSession()
+    public function closeSession()
     {
+        echo "DEBUG: ".__METHOD__.PHP_EOL;
         session_destroy();
         $this->_aUser = false;
         return true;

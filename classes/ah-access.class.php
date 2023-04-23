@@ -167,7 +167,7 @@ class ahAccesscontrol
 
     
     // ----------------------------------------------------------------------
-    // USER FUNCTIONS
+    // USER FUNCTIONS :: DETECT AND LOAD
     // ----------------------------------------------------------------------
     /**
      * some magic stuff: automatically detect an authenticated user
@@ -234,7 +234,7 @@ class ahAccesscontrol
     }
 
     // ----------------------------------------------------------------------
-    // 
+    // USER FUNCTIONS :: AFTER LOGIN
     // ----------------------------------------------------------------------
 
     /**
@@ -342,7 +342,7 @@ class ahAccesscontrol
      * get a flat array with all found roles in cfg_rolesmapping.php
      * @return array
      */
-    public  function getDefinedRoles()
+    public function getDefinedRoles()
     {
         $aReturn = [];
         $aMappings = include($this->_sDatadir . '/roles/cfg_rolesmapping.php');
@@ -354,6 +354,26 @@ class ahAccesscontrol
         return array_keys($aReturn);
     }
     // ----------------------------------------------------------------------
-    // USER FUNCTIONS
+    // USER FUNCTIONS :: LOGOUT
     // ----------------------------------------------------------------------
+
+    /**
+     * logout current user
+     * @return boolean
+     */
+    public function logout(){
+        if (!$this->user){
+            return false; // no user is logged in
+        }
+
+        echo "DEBUG: ".__METHOD__.PHP_EOL;
+        $this->auth->closeSession();
+        $this->auth=false;
+
+        $this->user = false;
+        $this->groups = [];
+        $this->roles = [];
+        return true;
+    }
+
 }
