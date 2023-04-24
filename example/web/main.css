@@ -10,5 +10,7 @@ header a{color: #eef; text-decoration: none;}
 header a:hover{text-decoration: underline;}
 header span.user{float: right;}
 
-hr{border: none; border-bottom: 3px dashed #ccc; margin-top: 5em;}
-pre{background: #eee; color: #668; opacity: 1; font-family:'Courier New', Courier,   monospace; font-size: 90%;}
+hr{border: none; border-bottom: 3px dotted #ccc; margin: 5em 0 2em;;}
+pre{background: rgba(0,0,0,0.05); color: #446; opacity: 1; font-family:'Courier New', Courier,   monospace; font-size: 90%; padding: 1em;}
+
+div.snippets{background:#e0e8e4; padding: 1em; border-radius: 1em;}

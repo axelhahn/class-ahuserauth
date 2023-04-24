@@ -17,6 +17,7 @@ if (!$ACCESS_USER){
     <p>
         Hello, <strong>'.$ACCESS_USER.'</strong>.<br>
         <br>
+        <button class="pure-button pure" onclick="history.back(); return false;">Back</button>
         <a href="logout.php" class="pure-button">Logout</a>
     </p>
     <p>

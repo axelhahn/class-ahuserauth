@@ -35,13 +35,14 @@ if (!$ACCESS_USER){
     </form>
 
     <hr>
-    <h2>Snippets</h2>
-    <p>
-        For logout there is the method logout(). This destroys the session.<br>
-        Maybe you want to refresh the current page too - then send a location header.
-    </p>
-    <pre>'.htmlentities($sSnippet1).'</pre>
-
+    <div class="snippets">
+        <h2>Snippets</h2>
+        <p>
+            For logout there is the method logout(). This destroys the session.<br>
+            Maybe you want to refresh the current page too - then send a location header.
+        </p>
+        <pre>'.htmlentities($sSnippet1).'</pre>
+    </div>
     '
     ;
 }

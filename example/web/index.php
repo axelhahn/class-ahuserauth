@@ -25,6 +25,8 @@ showPage([
         . ($ACCESS_USER
             ? '<p>
                 OK, you are logged in.<br>
+                <br>
+                <a href="profile.php" class="pure-button">Profile</a>
                 </p>            
                 '
             : '<p>
@@ -48,15 +50,17 @@ showPage([
         -->
 
         <hr>
-        <h2>Snippets</h2>
-        <p>
-            We need to initialize the class that handles access.<br>
-        </p>
-        <pre>'.htmlentities($sSnippet1).'</pre>
-        <p>
-            We can detect if a user is logged in:
-        </p>
-        <pre>'.htmlentities($sSnippet2).'</pre>
+        <div class="snippets">
+            <h2>Snippets</h2>
+            <p>
+                We need to initialize the class that handles access.<br>
+            </p>
+            <pre>'.htmlentities($sSnippet1).'</pre>
+            <p>
+                We can detect if a user is logged in:
+            </p>
+            <pre>'.htmlentities($sSnippet2).'</pre>
+        </div>
         '
         ,
 ]);
