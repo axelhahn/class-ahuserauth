@@ -30,7 +30,8 @@ if (!$ACCESS_USER){
         <input type="hidden" name="action" value="logout" />
         Are you sure that you want to logout from user <strong>'.$ACCESS_USER.'</strong>?<br>
         <br>
-        <button class="pure-button">Logout</button>
+        <button class="pure-button pure" onclick="history.back(); return false;">Back</button>
+        <button class="pure-button pure-button-primary">Logout</button>
     </form>
 
     <hr>

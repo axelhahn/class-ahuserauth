@@ -53,7 +53,7 @@ if (!$ACCESS_USER){
     <pre>'.htmlentities(file_get_contents($sEnvFile)).'</pre>
 
     <p>
-        <a href="?login=1" class="pure-button">Login now</a>
+        <a href="?login=1" class="pure-button pure-button-primary">Login now</a>
         <a href="/login.php" class="pure-button">Pickup another method</a><br>
     </p>
     ';

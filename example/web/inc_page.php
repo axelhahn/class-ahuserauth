@@ -37,14 +37,15 @@ function showPage($aParts, $iCode=200){
     <html>
         <head>
             <title>{{TITLE}}</title>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/3.0.0/pure-min.css" integrity="sha512-X2yGIVwg8zeG8N4xfsidr9MqIfIE8Yz1It+w2rhUJMqxUwvbVqC5OPcyRlPKYOw/bsdJut91//NO9rSbQZIPRQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link rel="stylesheet" href="/main.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         </head>
         <body>
             <header>
                 <span class="user">{{USERPROFILE}}</span>
                 <h1>{{TITLE}}</h1>
-                <nav><a href="/index.php" class="">Home</a> {{NAV}}</nav>
+                <nav><a href="/index.php" class=""><i class="fa-solid fa-house"></i> Home</a> {{NAV}}</nav>
             </header>
 
             <article class="sbox">
@@ -58,8 +59,8 @@ function showPage($aParts, $iCode=200){
 
     if(!isset($aParts['userprofile'])){
         $aParts['userprofile']=$ACCESS_USER 
-            ? '<a href="/profile.php">'.$ACCESS_USER.'</a>' 
-            : '<a href="/login.php">Login</a>'
+            ? '<a href="/profile.php"><i class="fa-solid fa-user"></i> '.$ACCESS_USER.'</a>' 
+            : '<a href="/login.php"><i class="fa-solid fa-right-to-bracket"></i> Login</a>'
             ;
     }
     foreach([

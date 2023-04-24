@@ -6,7 +6,8 @@ h2{color: #448;}
 h3{color: #66a;}
 header, .sbox{border-radius: 1.5em; box-shadow: 0 0 3em #dcdcdc; padding: 2em; margin-bottom: 2em;}
 header{background: #125; padding: 1em; border: 3px solid rgba(0,0,0,0.1); color:#abc;}
-header a{color: #eef;}
+header a{color: #eef; text-decoration: none;}
+header a:hover{text-decoration: underline;}
 header span.user{float: right;}
 
 hr{border: none; border-bottom: 3px dashed #ccc; margin-top: 5em;}
