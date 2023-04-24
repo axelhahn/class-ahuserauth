@@ -41,7 +41,11 @@ if (!$ACCESS_USER){
         into $_SERVER:
     </p>
     <pre>'.htmlentities(file_get_contents($sEnvFile)).'</pre>
-    <a href="?login=1" class="pure-button">Login now</a><br>
+
+    <p>
+        <a href="?login=1" class="pure-button">Login now</a>
+        <a href="/login.php" class="pure-button">Pickup another method</a><br>
+    </p>
 
     ';
 } else {

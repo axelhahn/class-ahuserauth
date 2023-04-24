@@ -38,6 +38,10 @@ if (!$ACCESS_USER){
         In the real world the browser shows a dialog to enter user and password.<br>
         The mostly known authentication is with a local htpasswd file.<br>
         But you can use basic auth with sql databases or ldap too.<br>
+        <br>
+        After a successful login the username can be found in AUTH_USER, PHP_AUTH_USER or REMOTE_USER.<br>
+        <br>
+        Snippet for Apache httpd to protect a file:
     </p>
     <pre>'.htmlentities($sSnippet1).'</pre>
     <h3>Simulation</h3>
@@ -47,7 +51,11 @@ if (!$ACCESS_USER){
         into $_SERVER:
     </p>
     <pre>'.htmlentities(file_get_contents($sEnvFile)).'</pre>
-    <a href="?login=1" class="pure-button">Login now</a><br>
+
+    <p>
+        <a href="?login=1" class="pure-button">Login now</a>
+        <a href="/login.php" class="pure-button">Pickup another method</a><br>
+    </p>
     ';
 } else {
     $sContent.='<h2>Success</h2>

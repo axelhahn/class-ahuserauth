@@ -10,4 +10,4 @@ header a{color: #eef;}
 header span.user{float: right;}
 
 hr{border: none; border-bottom: 3px dashed #ccc;}
-pre{background: #eee; color: #668; opacity: 1; font-family:'Courier New', Courier,   monospace; }
+pre{background: #eee; color: #668; opacity: 1; font-family:'Courier New', Courier,   monospace; font-size: 90%;}
