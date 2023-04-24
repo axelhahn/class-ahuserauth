@@ -9,5 +9,5 @@ header{background: #125; padding: 1em; border: 3px solid rgba(0,0,0,0.1); color:
 header a{color: #eef;}
 header span.user{float: right;}
 
-hr{border: none; border-bottom: 3px dashed #ccc;}
+hr{border: none; border-bottom: 3px dashed #ccc; margin-top: 5em;}
 pre{background: #eee; color: #668; opacity: 1; font-family:'Courier New', Courier,   monospace; font-size: 90%;}

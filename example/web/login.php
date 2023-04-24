@@ -8,8 +8,8 @@ if (!$ACCESS_USER){
     <p>
         You can simulate a login with the following methods:<br>
         <br>
-        <a href="protected/shibboleth.php" class="pure-button">AAI</a>
         <a href="protected/basic-auth.php" class="pure-button">Basic authentication</a>
+        <a href="protected/shibboleth.php" class="pure-button">Shibboleth</a>
     </p>
     ';
 } else {

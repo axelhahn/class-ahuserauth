@@ -2,6 +2,9 @@
 
 require('inc_page.php');
 
+$sSnippet1='$oAccess->logout();
+header(\'Location: \'.basename(__FILE__));';
+
 // do logout if a POST was sent
 if(isset($_POST['action']) && $_POST['action']=='logout'){
     // echo 'DEBUG: <pre>$_POST = '.print_r($_POST, 1).'</pre>';
@@ -29,6 +32,15 @@ if (!$ACCESS_USER){
         <br>
         <button class="pure-button">Logout</button>
     </form>
+
+    <hr>
+    <h2>Snippets</h2>
+    <p>
+        For logout there is the method logout(). This destroys the session.<br>
+        Maybe you want to refresh the current page too - then send a location header.
+    </p>
+    <pre>'.htmlentities($sSnippet1).'</pre>
+
     '
     ;
 }
