@@ -84,7 +84,6 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 
-
 $ACCESS_APPDIR=__DIR__.'/../..';
 require($ACCESS_APPDIR.'/classes/ah-access.class.php');
 
