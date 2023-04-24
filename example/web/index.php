@@ -2,6 +2,16 @@
 
 require('inc_page.php');
 
+$sSnippet1='$ACCESS_APPDIR=\'[app path]\';
+require($ACCESS_APPDIR.\'/classes/ah-access.class.php\');
+$oAccess=new axelhahn\ahAccesscontrol();';
+
+$sSnippet2='if(!$oAccess->detectUser()) {
+    echo "You are not logged in yet.<br>";
+} else {
+    echo "OK, you are logged in.<br>";
+}';
+
 showPage([
     'title'=>'Welcome',
     'nav'=>'',
@@ -10,14 +20,14 @@ showPage([
         <h2>Hello</h2>
         <p>
             Here is a public, unprotected page.<br>
-        </p>'
+        </p>
+        '
         . ($ACCESS_USER
             ? '<p>
                 OK, you are logged in.<br>
                 </p>            
                 '
-            : '<h2>Let\'s start</h2>    
-                <p>
+            : '<p>
                     You are not logged in yet.<br>
                     <br>
                     <a href="login.php" class="pure-button">Login</a>
@@ -36,6 +46,17 @@ showPage([
             <a href="/app-pages/role1.php" class="pure-button">App - role 1</a> - authenticated users only.<br>
         </p>
         -->
+
+        <hr>
+        <h2>Snippets</h2>
+        <p>
+            We need to initialize the class that handles access.<br>
+        </p>
+        <pre>'.htmlentities($sSnippet1).'</pre>
+        <p>
+            We can detect if a user is logged in:
+        </p>
+        <pre>'.htmlentities($sSnippet2).'</pre>
         '
         ,
 ]);

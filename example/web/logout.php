@@ -18,6 +18,7 @@ if (!$ACCESS_USER){
         You were logged out.<br>
         <br>
         <a href="/index.php" class="pure-button">Home</a>
+        <a href="/login.php" class="pure-button">Login</a>
     </p>
     ';
 } else {

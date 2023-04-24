@@ -1,7 +1,7 @@
 <?php
 
 // ----------------------------------------------------------------------
-global $ACCESS_USER; $ACCESS_USER='';
+global $ACCESS_USER;
 global $oAccess;
 
 // ----------------------------------------------------------------------
@@ -84,7 +84,7 @@ error_reporting(E_ALL);
 
 
 
-$ACCESS_APPDIR=__DIR__.'/../../';
+$ACCESS_APPDIR=__DIR__.'/../..';
 require($ACCESS_APPDIR.'/classes/ah-access.class.php');
 
 $oAccess=new axelhahn\ahAccesscontrol();

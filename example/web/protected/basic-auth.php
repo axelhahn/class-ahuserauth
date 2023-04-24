@@ -2,22 +2,52 @@
 
 require('../inc_page.php');
 
-// (1) 
-// fake a login by setting some vars into $_SERVER ...
-require($ACCESS_APPDIR.'/example/inc_fakeenv_basicauth.php');
+$sEnvFile=$ACCESS_APPDIR.'/example/inc_fakeenv_basicauth.php';
+if (isset($_GET['login']) && $_GET['login']){
+    // (1) 
+    // fake a login by setting some vars into $_SERVER ...
+    require($sEnvFile);
 
-// (2)
-// ... and detect the user again
-getUser();
+    // (2)
+    // ... and detect the user again
+    getUser();
+
+}
+
+$sSnippet1='<Location /protected/basic-auth.php>
+
+  AuthType Basic
+  AuthName "My app - protected area"
+  
+  // verify against ...
+  AuthBasicProvider ldap
+  AuthLDAPURL "ldaps://ldap.example.com:636/..." SSL
+  AuthLDAPBindDN "cn=lookup,dc=example.com"
+  AuthLDAPBindPassword "password-of-lookup-user"
+
+  Require valid-user
+
+</Location>';
 
 
 $sContent='';
 if (!$ACCESS_USER){
-    $sContent.='<h2>Oops</h2>
+    $sContent.='<h2>Basic authentication</h2>
+    <h3>In the real world...</h3>
     <p>
-        Login failed. Even in this demo.
+        In the real world the browser shows a dialog to enter user and password.<br>
+        The mostly known authentication is with a local htpasswd file.<br>
+        But you can use basic auth with sql databases or ldap too.<br>
     </p>
-    <pre>'.print_r($oAccess->dump(), 1).'</pre>
+    <pre>'.htmlentities($sSnippet1).'</pre>
+    <h3>Simulation</h3>
+    <p>
+        All these I don\'t have here.<br>
+        For simulation of a basic authentication these data will be injected 
+        into $_SERVER:
+    </p>
+    <pre>'.htmlentities(file_get_contents($sEnvFile)).'</pre>
+    <a href="?login=1" class="pure-button">Login now</a><br>
     ';
 } else {
     $sContent.='<h2>Success</h2>
